@@ -2,7 +2,7 @@
 
 Follow this guide to setup a system with GPU drivers, CUDA toolkit, NVIDIA cuDNN, Miniconda, Docker and NVIDIA Container Toolkit.
 
-# THESE INSTRUCTIONS ARE FOR UBUNTU 22.04 (OLD)
+## THESE INSTRUCTIONS ARE FOR UBUNTU 22.04 (OLD)
 The commands in this readme are for Ubuntu 22.04. You can follow similar steps for other Ubuntu versions however the commands will be slightly different. Instructions last updated Mar 3 2024.
 
 ## 1. GPU Drivers
