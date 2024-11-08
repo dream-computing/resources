@@ -192,3 +192,7 @@ logout and back in using GNOME desktop
 sudo apt remove gnome-shell-extension-ubuntu-dock
 ```
 remove login screen
+```bash
+sudo apt install dconf-editor
+gsettings set org.gnome.desktop.interface clock-show-date false
+```
