@@ -171,10 +171,24 @@ Install it using the command:
 ```bash
 bash Miniconda3-latest-Linux-x86_64.sh
 ```
-### 5. Hide Splash
+### 5. Customize Desktop
 ```bash
 sudo apt install plymouth-themes
 ```
 ```bash
 sudo plymouth --hide-splash
 ```
+```bash
+sudo apt install ubuntu-gnome-desktop
+```
+```bash
+sudo dpkg-reconfigure gdm3
+```
+```bash
+sudo apt install gnome-tweaks
+```
+logout and back in using GNOME desktop
+```bash
+sudo apt remove gnome-shell-extension-ubuntu-dock
+```
+remove login screen
