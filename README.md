@@ -196,3 +196,7 @@ remove login screen
 sudo apt install dconf-editor
 gsettings set org.gnome.desktop.interface clock-show-date false
 ```
+remove hot corner
+```
+gsettings set org.gnome.desktop.interface enable-hot-corners false
+```
