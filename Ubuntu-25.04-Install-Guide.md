@@ -49,10 +49,47 @@ Tue Jul  1 12:25:13 2025
 You should see your driver version, and be able to see the Correct GPU is detected. in my case `GeForce RTX 5090`.
 
 ## Basic Ubuntu Packages
-
+You will need these packages installed before we can install the items below.
 ```bash
 sudo apt install curl
+sudo apt install gcc
+sudo apt install gedit
 ```
+
+## NVIDIA Cuda Toolkit
+You will need to install NVIDIA cuda toolkit. There are a variety of ways to install NVIDIA cuda toolkit, this is my prefered installation method. There is more detailed information /guide for installing cuda toolkit at https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html
+
+GCC compilers are required to install cuda toolkit, it can easily be installed with `sudo apt install gcc`
+
+```bash
+wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/x86_64/cuda-keyring_1.1-1_all.deb
+sudo dpkg -i cuda-keyring_1.1-1_all.deb
+sudo apt-get update
+sudo apt-get -y install cuda-toolkit-12-9
+```
+There are additional post installation actions we must complete in order for our system to recognize the cuda toolkit system wide. We need to add the cuda toolkit location to our system path. We can install gedit (simple text editor) `sudo apt install gedit` to modify our system `.bashrc`.
+```bash
+gedit .bashrc
+```
+Once you have opened the `.bashrc` add these two lines:
+```bash
+export PATH=${PATH}:/usr/local/cuda-12.9/bin
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/cuda-12.9/lib64
+```
+This tells our system that where we installed cuda toolkit. It is very common that AI/ML libraries will use the environment variables directly to interface with cuda. If these variables are not set your code will break.
+
+You can verify that the install was sucesseful by opening a new terminal and typing the following:
+```bash
+dream@dream-1-01:~$ nvcc --version
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2025 NVIDIA Corporation
+Built on Tue_May_27_02:21:03_PDT_2025
+Cuda compilation tools, release 12.9, V12.9.86
+Build cuda_12.9.r12.9/compiler.36037853_0
+```
+
+
+
 
 ## Tailscale Install
 ```bash
