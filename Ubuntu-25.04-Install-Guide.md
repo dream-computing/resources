@@ -139,8 +139,64 @@ Verify the post installtion actions were sucessful by running the hellow world w
 docker run hello-world
 ```
 
-## NVIDA Docker Toolkit
-You will need to follow some additonal steps to enable docker to use your NVIDIA GPU.
+## NVIDA Container Toolkit
+You will need to follow some additonal steps to enable docker to use your NVIDIA GPU. Use the following commands to install and enable the container toolkit
+
+```bash
+curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
+  && curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \
+    sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
+    sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
+```
+
+```bash
+sudo apt-get update
+```
+```bash
+export NVIDIA_CONTAINER_TOOLKIT_VERSION=1.17.8-1
+  sudo apt-get install -y \
+      nvidia-container-toolkit=${NVIDIA_CONTAINER_TOOLKIT_VERSION} \
+      nvidia-container-toolkit-base=${NVIDIA_CONTAINER_TOOLKIT_VERSION} \
+      libnvidia-container-tools=${NVIDIA_CONTAINER_TOOLKIT_VERSION} \
+      libnvidia-container1=${NVIDIA_CONTAINER_TOOLKIT_VERSION}
+```
+Next we will need to configure docker:
+```bash
+sudo nvidia-ctk runtime configure --runtime=docker
+```
+```bash
+sudo systemctl restart docker
+```
+Then you will be able to verify that everything was installed correctly when you can run:
+```bash
+sudo docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi
+```
+
+## Miniconda (Python)
+My recommended python environment is conda. conda will allow you to create different python environments super easily with different python version and also gives you some additional ways to install python libraries when the `pip install` does not work properly (becuase some python packages have aditional dependencies that do not ship with the pip library).
+
+```bash
+mkdir -p ~/miniconda3
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh
+bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
+rm ~/miniconda3/miniconda.sh
+```
+
+This will install miniconda. Next lets activate miniconda in all available shells:
+
+```bash
+source ~/miniconda3/bin/activate
+```
+```bash
+conda init --all
+```
+Now every time you open a terminal you should see the base conda environment indicator `(base)`
+
+```bash
+(base) dream@dream-1-01:~$
+```
+Here is some additional information on using conda: https://docs.conda.io/projects/conda/en/stable/user-guide/getting-started.html
+
 
 ## Tailscale Install
 ```bash
