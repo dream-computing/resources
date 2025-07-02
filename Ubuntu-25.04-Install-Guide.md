@@ -97,7 +97,50 @@ sudo dpkg -i cuda-keyring_1.1-1_all.deb
 sudo apt-get update
 sudo apt-get -y install cudnn
 ```
+You can follow instructions on how to validate that cuDNN is installed correctly but as long as I do not see any errors I usually skip this validation.
 
+Note some AI/ML code requires older versions of cuDNN specifically - if this is the case the best course of action is to manually download older versions and make sure the appropriate files `*.so` etc are in the correct path. The code will complain about the specific missing files.
+
+## Docker
+Docker is an incediby powerful and useful tool that people often overlook. Installing Docker correctly system wide is a little tricky. Here is the current docker desktop setup for linux (https://docs.docker.com/desktop/setup/install/linux/ubuntu/)
+```bash
+# Add Docker's official GPG key:
+sudo apt-get update
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Add the repository to Apt sources:
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+```
+```bash
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
+Verify the install with:
+```bash
+sudo docker run hello-world
+```
+
+There are a couple recommended post installtion actions for linux that will allow you to run docker without sudo:
+https://docs.docker.com/engine/install/linux-postinstall/
+
+```bash
+sudo groupadd docker
+sudo usermod -aG docker $USER
+newgrp docker
+```
+Verify the post installtion actions were sucessful by running the hellow world without `sudo`
+```bash
+docker run hello-world
+```
+
+## NVIDA Docker Toolkit
+You will need to follow some additonal steps to enable docker to use your NVIDIA GPU.
 
 ## Tailscale Install
 ```bash
