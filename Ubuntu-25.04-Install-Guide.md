@@ -1,7 +1,7 @@
 # Ubuntu 25.04 Install Guide (50 Series)
 ## Last Updated: 1 July 2025
 
-This guide will walk you through the setup process for Ubuntu Desktop (25.04) to inference AI/ML models. This guide assumes you have a computer equip with a 50 series NVIDIA GPU and an empty ssd or m.2 drive available for installing linux.
+This guide will walk you through the setup process for Ubuntu Desktop (25.04) to inference AI/ML models. This guide assumes you have a computer equip with a 50 series NVIDIA GPU and an empty ssd or m.2 drive available for installing linux. Note that install information changes often and that the commands documented in the code blocks might not be the most up to date and correct commands. It is always recommended to google the thing you are about to install first and double check the install instructions.
 
 ## USB Bootloader
 The first step in the process is to create an installation medium for Ubuntu Desktop (25.04).  Download the Ubuntu Desktop version 25.04 ISO from the following url: https://ubuntu.com/download/desktop . At the time of writing the 50 series NVIDIA drivers (driver version 570) are incompatible with the vanilla Ubuntu Desktop 24.04. It is possible to upgrade the ubuntu 24.04 kernel to support the 50 series drivers, but this process is very tedious and can often result in errors. When you install and setup Ubuntu Destkop 24.04 with an NVIDA 50 series GPU, the NVIDIA drivers will (most likley) not work out of the box and you will be unable to run common AI/ML programs/applications.
@@ -88,7 +88,15 @@ Cuda compilation tools, release 12.9, V12.9.86
 Build cuda_12.9.r12.9/compiler.36037853_0
 ```
 
+## NVIDIA cuDNN
+Another very common library used by AI/ML applications is cuDNN. In order to install cuDNN you will need to visit https://developer.nvidia.com/cudnn-downloads which will also require you make an account. technically you do not need an account and can you the information below however this might not be the most up to date information. Here are the cudnn installation guided from nvida https://docs.nvidia.com/deeplearning/cudnn/installation/latest/index.html
 
+```bash
+wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/x86_64/cuda-keyring_1.1-1_all.deb
+sudo dpkg -i cuda-keyring_1.1-1_all.deb
+sudo apt-get update
+sudo apt-get -y install cudnn
+```
 
 
 ## Tailscale Install
