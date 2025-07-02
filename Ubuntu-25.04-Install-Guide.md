@@ -206,3 +206,11 @@ Simply click the approapriate download link which should download a `.deb` file.
 curl -fsSL https://tailscale.com/install.sh | sh
 sudo tailscale up
 ```
+For remote connection through ssh and other computers you need to add the following permissions:
+```bash
+sudo apt install openssh-server
+sudo systemctl enable ssh
+sudo systemctl start ssh
+sudo ufw allow ssh
+sudo ufw allow 22/tcp
+```
