@@ -197,6 +197,9 @@ Now every time you open a terminal you should see the base conda environment ind
 ```
 Here is some additional information on using conda: https://docs.conda.io/projects/conda/en/stable/user-guide/getting-started.html
 
+## VSCODE
+I recommend installing VSCODE as a code editor: https://code.visualstudio.com/download
+Simply click the approapriate download link which should download a `.deb` file. find and right-click the .deb file then select open with app center. you should be presented with a window and an install button (this is a very common way to install linux applications).
 
 ## Tailscale Install
 ```bash
